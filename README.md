@@ -1,5 +1,5 @@
 # RedRtMidiPoC
-Simple PoC that shows Midi IN messages handling with Red language
+Simple PoC that shows Midi IN messages handling with Red language. RtMidi version 4.0 is used.
 
 This code provides some bindings for the RtMidi library as well as RtMidi binaries for Windows and MacOS. The purpose of this code is to test a "callback" from external library. It is not extensively tested and may contain bugs.
 
