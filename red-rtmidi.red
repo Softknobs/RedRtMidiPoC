@@ -8,7 +8,7 @@ midi-message: copy []
 partial-input-port-name: copy []
 input-port-names: copy []
 
-; Retrieve on last two bytes of midi message value
+; Retrieve last two bytes of midi message value
 to-string-byte: function [value [integer!]][
 	;get last byte as string
 	at tail form to-hex	value -2
@@ -17,6 +17,7 @@ to-string-byte: function [value [integer!]][
 ; Function that builds a midi message sent from R/S RtMidi code
 build-message: func [value [integer!] last [logic!]][		
 	append partial-midi-message to-string-byte value	
+	append partial-midi-message " "
 	if (last) [		
 		clear midi-message
 		midi-message: append partial-midi-message		
@@ -73,7 +74,6 @@ build-message: func [value [integer!] last [logic!]][
 		user-data-pointer [integer!]
 		/local i
 	][
-		print-line ["Size: " size]
 		i: 1		
 		while [i <= size] [			
 			#call [							
@@ -100,6 +100,7 @@ open-midi-port: routine [
 	midi-pointer: native-midi-in-pointer RtMidi-API "REDMIDI" 100
 	native-open-port midi-pointer port-number ""	
 	native-set-callback midi-pointer :midi-in-callback ""
+	native-midi-in-ignore-types midi-pointer false false false
 	midi-pointer
 ]
 
@@ -108,6 +109,17 @@ close-midi-port: routine [
 	midi-pointer [integer!] 	
 ][	
 	native-close-port midi-pointer
+]
+
+
+; Routine to change ignored types
+set-ignore-types: routine [
+	midi-pointer [integer!] 
+	sysex [logic!]
+	time [logic!]
+	sense [logic!]	
+][	
+	native-midi-in-ignore-types midi-pointer sysex time sense
 ]
 
 
@@ -148,6 +160,7 @@ repeat i port-count [
 midi-pointer: none!
 
 view [
+	title "Midi Input"
 	text 200x32 "Midi inputs"
 	text "Received messages" return
 	midi-inputs: text-list 200x400 data input-port-names on-change [		
