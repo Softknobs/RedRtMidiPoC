@@ -3,7 +3,7 @@ Simple PoC that shows Midi IN messages handling with Red language. RtMidi versio
 
 This code provides some bindings for the RtMidi library as well as RtMidi binaries for Windows and MacOS. The purpose of this code is to test a "callback" from external library. It is not extensively tested and may contain bugs.
 
-At the time of writing, the macOS version does not behave exactly like the Windows. On macOS, messages are not written to the text area, however they are still received correctly by the application.
+At the time of writing, the macOS version does not behave exactly like the Windows. On macOS, messages are written to the text area but you will need to hover it with mouse for the display to update. Otherwise, the macOS version seems to work just like the Windows one.
 
 ![Screenshot](https://github.com/Softknobs/RedRtMidiPoC/blob/master/red-rtmidi-ui.png)
 
