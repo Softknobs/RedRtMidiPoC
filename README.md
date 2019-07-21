@@ -5,7 +5,7 @@ This code provides some bindings for the RtMidi library as well as RtMidi binari
 
 At the time of writing, the macOS version does not behave exactly like the Windows. On macOS, messages are not written to the text area, however they are still received correctly by the application.
 
-![Screenshot](https://github.com/Softknobs/RedRtMidiPoC/blob/master/red-rtmidi_2019-07-21_00-50-10.png)
+![Screenshot](https://github.com/Softknobs/RedRtMidiPoC/blob/master/red-rtmidi-ui.png)
 
 ## Compilation or Cross compilation
 
